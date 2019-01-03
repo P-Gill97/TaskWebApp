@@ -10,7 +10,8 @@
       crossorigin="anonymous"
     />
   </head>
-  <body>
+  <!-- on load to make sure function fetch tasks runs once when page is loaded-->
+  <body onload="fetchtasks()">
     <div class="container">
       <h1>Tasks<small> by P-Gill97</small></h1>
       <div class="jumbotron">
@@ -27,7 +28,7 @@
           </div>
           <div class="form-group">
             <label for="taskPriority">Priority level </label>
-            <select class="form-control" id="PriorityInput">
+            <select class="form-control" id="taskPriorityInput">
               <option value="Low">Low</option>
               <option value="Medium">Medium</option>
               <option value="High">High</option>
@@ -50,7 +51,7 @@
 
         </div>
       </div>
-      
+
       <div class="footer">
         <p>-P-Gill97</p>
       </div>

@@ -1,3 +1,11 @@
+// event handeler
+document.getElementsById('taskInputForm').addEventLisener('submit', saveTask);
+function saveTask(e){
+  var taskDesc = document.getElementsById('taskDescInput').value;
+  var taskPriority = document.getElementsById('taskPriorityInput').value;
+
+
+}
 function fetchtasks() {
   var tasks = JSON.parse(localStorage.getItem("tasks"));
   var tasksListe = document.getElementsById("tasksList");
