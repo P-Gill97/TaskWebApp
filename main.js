@@ -1,10 +1,33 @@
 // event handeler
-document.getElementsById('taskInputForm').addEventLisener('submit', saveTask);
-function saveTask(e){
-  var taskDesc = document.getElementsById('taskDescInput').value;
-  var taskPriority = document.getElementsById('taskPriorityInput').value;
+document.getElementsById("taskInputForm").addEventLisener("submit", saveTask);
+function saveTask(e) {
+  var taskDesc = document.getElementsById("taskDescInput").value;
+  var taskPriority = document.getElementsById("taskPriorityInput").value;
+  var taskSubject = document.getElementsById("taskSubjectInput").value;
+  var taskId = chance.guid();
+  var taskStatus = "Unfinished";
 
+  var task = {
+    id: taskId,
+    description: taskDesc,
+    priority: taskPriority,
+    subject: taskSubject,
+    status: taskStatus
+  }
+  if(localStorage.getItem('tasks') == null){
+    var tasksArr = [];
+    tasksArr.push(task);
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+  }else{
+    var tasksArr = JSON.parse(localStorage.getItem('tasks'));
+    tasksArr.push(task);
+    localStorage.setItem('tasks',JSON.stringify(tasksArr));
+  }
+  document.getElementsById('taskInputForm').reset();
 
+  fetchtasks();
+
+  e.preventDefault();
 }
 function fetchtasks() {
   var tasks = JSON.parse(localStorage.getItem("tasks"));
@@ -33,15 +56,17 @@ function fetchtasks() {
       "</h3>" +
       '<p><span class = "glyphicon glyphicon-time "></span>' +
       Priority +
-      "</span></p>";
-    '<p><span class = "glyphicon glyphicon-user "></span>' +
+      "</span></p>" +
+      '<p><span class = "glyphicon glyphicon-user "></span>' +
       Subject +
       "</span></p>" +
       // making button for done and remove function.
-      '<a href="#" onclick ="setStatusDone(\''+id+'\')"class="btn btn-warning">Mark done</a>' +
-      '<a href="#" onclick="deleteTask(\''+id+'\')" class="btn btn-danger">Remove</a>'+
-      '</div>';
-
-      ;
+      '<a href="#" onclick ="setStatusDone(\'' +
+      id +
+      '\')"class="btn btn-warning">Mark done</a>' +
+      '<a href="#" onclick="deleteTask(\'' +
+      id +
+      '\')" class="btn btn-danger">Remove</a>' +
+      "</div>";
   }
 }
