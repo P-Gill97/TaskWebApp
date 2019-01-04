@@ -45,6 +45,17 @@ function setStatusDone (id){
 localStorage.setItem('tasks', JSON.stringify(tasks));
 fetchtasks();
 }
+function deleteTask(id){
+  var tasks = JSON.parse(localStorage.getItem('tasks'));
+
+  for(var i = 0; i < tasks.length; i++){
+    if(tasks[i].id == id){
+      tasks.splice(i,1);
+    }
+  }
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+  fetchtasks();
+}
 function fetchtasks() {
   var tasks = JSON.parse(localStorage.getItem('tasks'));
   var tasksListe = document.getElementById('tasksList');
