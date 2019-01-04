@@ -1,5 +1,6 @@
 // event handeler
-document.getElementById("taskInputForm").addEventLisener('submit', saveTask);
+document.getElementById("taskInputForm").addEventListener('submit', saveTask);
+console.log("about to start saveTask  ");
 function saveTask(e) {
   console.log('Started save task');
   var taskDesc = document.getElementById('taskDescInput').value;
@@ -15,40 +16,38 @@ function saveTask(e) {
     subject: taskSubject,
     status: taskStatus
   };
-  if (localStorage.getItem("tasks") == null) {
-    var tasksArr = [];
-    tasksArr.push(task);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+  if (localStorage.getItem('tasks') == null) {
+    var tasks = [];
+    tasks.push(task);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
   } else {
-    var tasksArr = JSON.parse(localStorage.getItem("tasks"));
-    tasksArr.push(task);
-    localStorage.setItem("tasks", JSON.stringify(tasksArr));
+    var tasks = JSON.parse(localStorage.getItem('tasks'));
+    tasks.push(task);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   }
   document.getElementById("taskInputForm").reset();
 
   fetchtasks();
 
   e.preventDefault();
+  console.log('end of saveTask')
 }
 function fetchtasks() {
   var tasks = JSON.parse(localStorage.getItem('tasks'));
   var tasksListe = document.getElementById('tasksList');
 
   tasksListe.innerHTML = '';
-  // hot fix
-if(tasks ==null){
-  tasks = [];
-}
+
+
   for (var i = 0; i < tasks.length; i++) {
     // get variables
     var id = tasks[i].id;
-    var desc = tasks[i].Description;
-    var prior = tasks[i].Priority;
-    var subj = tasks[i].Subject;
+    var desc = tasks[i].description;
+    var prior = tasks[i].priority;
+    var subj = tasks[i].subject;
     var status = tasks[i].status;
     //html output
     tasksList.innerHTML +=
-    console.log("innerHtml started ");
       '<div class="well">' +
       '<h6> Task id:'  + id + '</h6>' +
       '<p><span class = "label label-info ">' +
