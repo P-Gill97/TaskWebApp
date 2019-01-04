@@ -1,8 +1,8 @@
 // event handeler
 document.getElementById("taskInputForm").addEventListener('submit', saveTask);
-console.log("about to start saveTask  ");
+
 function saveTask(e) {
-  console.log('Started save task');
+
   var taskDesc = document.getElementById('taskDescInput').value;
   var taskPriority = document.getElementById('taskPriorityInput').value;
   var taskSubject = document.getElementById('taskSubjectInput').value;
@@ -30,7 +30,7 @@ function saveTask(e) {
   fetchtasks();
 
   e.preventDefault();
-  console.log('end of saveTask')
+
 }
 function fetchtasks() {
   var tasks = JSON.parse(localStorage.getItem('tasks'));
@@ -48,20 +48,20 @@ function fetchtasks() {
     var status = tasks[i].status;
     //html output
     tasksList.innerHTML +=
-      '<div class="well">' +
-      '<h6> Task id:'  + id + '</h6>' +
-      '<p><span class = "label label-info ">' +
+      '<div class="well jumbotron" >' +
+      '<h6 class="alert alert-secondary" > Task id:'  + id + '</h6>' +
+      '<p><span class="badge badge-pill badge-info">' +
       status +
       '</span></p>' +
       '<h3>' +
       desc +
       '</h3>' +
-      '<p><span class = "glyphicon glyphicon-time "></span>' +
+      '<p><span class ="glyphicon glyphicon-time"></span>' +
       prior +
-      '</span></p>' +
-      '<p><span class = "glyphicon glyphicon-user "></span>' +
+      '</p>' +
+      '<p><span class = "glyphicon glyphicon-user"></span>' +
       subj +
-      '</span></p>' +
+      '</p>' +
       // making button for done and remove function.
       '<a href="#" onclick ="setStatusDone(\'' +
       id +
@@ -71,5 +71,5 @@ function fetchtasks() {
       '\')" class="btn btn-danger">Remove</a>' +
       "</div>";
   }
-  console.log("innerHtml ended ");
+
 }
