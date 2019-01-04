@@ -32,6 +32,19 @@ function saveTask(e) {
   e.preventDefault();
 
 }
+//function to set status to done by using id of a task
+function setStatusDone (id){
+  var tasks = JSON.parse(localStorage.getItem('tasks'));
+
+  for(var i = 0;i<tasks.length;i++){
+    if(tasks[i].id == id){
+      tasks[i].status = 'Finished';
+    }
+
+  }
+localStorage.setItem('tasks', JSON.stringify(tasks));
+fetchtasks();
+}
 function fetchtasks() {
   var tasks = JSON.parse(localStorage.getItem('tasks'));
   var tasksListe = document.getElementById('tasksList');
